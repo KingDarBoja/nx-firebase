@@ -24,10 +24,9 @@ export function expectedFunctionProjectTargets(
         ],
         generatePackageJson: true,
         bundle: true,
-        dependenciesFieldType: 'dependencies',
         format: ['esm'],
         thirdParty: false,
-        target: 'node16',
+        target: 'node20',
         esbuildOptions: {
           logLevel: 'info',
         },
@@ -41,11 +40,11 @@ export function expectedFunctionProjectTargets(
       dependsOn: ['build'],
     },
     lint: {
-      executor: '@nx/linter:eslint',
-      outputs: ['{options.outputFile}'],
-      options: {
-        lintFilePatterns: [`${functionProject.projectDir}/**/*.ts`],
-      },
+      executor: '@nx/eslint:lint',
+      // outputs: ['{options.outputFile}'],
+      // options: {
+      //   lintFilePatterns: [`${functionProject.projectDir}/**/*.ts`],
+      // },
     },
     test: {
       executor: '@nx/jest:jest',
@@ -54,12 +53,12 @@ export function expectedFunctionProjectTargets(
         jestConfig: `${functionProject.projectDir}/jest.config.ts`,
         passWithNoTests: true,
       },
-      configurations: {
-        ci: {
-          ci: true,
-          codeCoverage: true,
-        },
-      },
+      // configurations: {
+      //   ci: {
+      //     ci: true,
+      //     codeCoverage: true,
+      //   },
+      // },
     },
   }
 }
